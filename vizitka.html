@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тамерлан Халилов — Автошкола</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --card: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #f2f2f2;
+    --muted: #8a8a8a;
+    --g1: #00d2ff;
+    --g2: #7b5cff;
+    --g3: #ff3cac;
+    --tg: #29a9eb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px 16px;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Фоновые светящиеся пятна */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+    animation: float 14s ease-in-out infinite;
+  }
+  .blob.b1 { width: 380px; height: 380px; background: var(--g2); top: -120px; left: -100px; }
+  .blob.b2 { width: 320px; height: 320px; background: var(--g3); bottom: -120px; right: -80px; animation-delay: -5s; }
+  .blob.b3 { width: 260px; height: 260px; background: var(--g1); top: 40%; left: 60%; animation-delay: -9s; opacity: 0.2; }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(40px, -30px) scale(1.1); }
+    66% { transform: translate(-30px, 30px) scale(0.95); }
+  }
+
+  /* Свечение за курсором */
+  .cursor-glow {
+    position: fixed;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123, 92, 255, 0.15), transparent 60%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    transition: opacity .3s;
+    opacity: 0;
+  }
+
+  /* Карточка */
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 460px;
+    padding: 48px 36px 40px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    text-align: center;
+    transform-style: preserve-3d;
+    transition: transform .15s ease-out;
+    animation: appear .9s cubic-bezier(.2, .8, .2, 1) both;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 28px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--g1), var(--g2), var(--g3));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  @keyframes appear {
+    from { opacity: 0; transform: translateY(30px) scale(.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Аватар с иконкой руля */
+  .avatar {
+    width: 104px; height: 104px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    position: relative;
+    display: grid;
+    place-items: center;
+    background: #111;
+  }
+  .avatar::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: conic-gradient(var(--g1), var(--g2), var(--g3), var(--g1));
+    z-index: -1;
+    animation: spin 6s linear infinite;
+  }
+  .avatar::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: conic-gradient(var(--g1), var(--g2), var(--g3), var(--g1));
+    filter: blur(18px);
+    opacity: .6;
+    z-index: -2;
+    animation: spin 6s linear infinite;
+  }
+  .avatar svg {
+    width: 54px; height: 54px;
+    color: #fff;
+    animation: steer 5s ease-in-out infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes steer {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-25deg); }
+    75% { transform: rotate(25deg); }
+  }
+
+  /* Имя */
+  .name {
+    font-size: clamp(30px, 8vw, 44px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3), var(--g2), var(--g1));
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 8s linear infinite;
+    filter: drop-shadow(0 0 18px rgba(123, 92, 255, .55)) drop-shadow(0 0 40px rgba(255, 60, 172, .25));
+  }
+  .name span { display: block; }
+  .patronymic {
+    margin-top: 8px;
+    font-size: clamp(16px, 4.5vw, 20px);
+    font-weight: 500;
+    color: #cfcfcf;
+    letter-spacing: .02em;
+  }
+  @keyframes shine { to { background-position: 300% 0; } }
+
+  /* Специализация */
+  .role {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .04);
+    font-size: 14px;
+    color: var(--text);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .role .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #3ddc84;
+    box-shadow: 0 0 10px #3ddc84;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .4; transform: scale(.8); }
+  }
+
+  .divider {
+    height: 1px;
+    margin: 32px 0 28px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  /* Соцсети */
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .social {
+    --c: var(--g2);
+    position: relative;
+    width: 56px; height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .04);
+    color: #d8d8d8;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform .3s cubic-bezier(.3, 1.6, .5, 1), color .3s, border-color .3s, box-shadow .3s, background .3s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .social svg { width: 26px; height: 26px; transition: transform .3s; }
+  .social:hover, .social:focus-visible {
+    transform: translateY(-6px) scale(1.06);
+    color: #fff;
+    background: var(--c);
+    border-color: var(--c);
+    box-shadow: 0 10px 30px -6px var(--c), 0 0 0 4px rgba(255, 255, 255, .03);
+    outline: none;
+  }
+  .social:hover svg { transform: rotate(-8deg) scale(1.08); }
+  .social:active { transform: translateY(-2px) scale(.96); }
+  .social.tg { --c: var(--tg); }
+  .social.vk { --c: #0077ff; }
+  .social.copy { --c: var(--g2); }
+  .social.share { --c: var(--g3); }
+
+  .social .tip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #1b1b1b;
+    border: 1px solid var(--border);
+    color: #eee;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s;
+  }
+  .social:hover .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .handle {
+    margin-top: -18px;
+    margin-bottom: 28px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .handle b { color: var(--text); font-weight: 600; }
+
+  /* Кнопка «Написать мне» */
+  .cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 18px 28px;
+    border: none;
+    border-radius: 16px;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3), var(--g1));
+    background-size: 300% 100%;
+    animation: shine 6s linear infinite, breathe 3s ease-in-out infinite;
+    transition: transform .25s cubic-bezier(.3, 1.6, .5, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  @keyframes breathe {
+    0%, 100% { box-shadow: 0 8px 30px -8px rgba(123, 92, 255, .7); }
+    50% { box-shadow: 0 8px 50px -4px rgba(255, 60, 172, .8); }
+  }
+  /* Блик, пробегающий по кнопке */
+  .cta::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .45), transparent);
+    transform: skewX(-20deg);
+    animation: glare 3.5s ease-in-out infinite;
+    z-index: -1;
+  }
+  @keyframes glare {
+    0%, 60% { left: -75%; }
+    100% { left: 130%; }
+  }
+  .cta:hover { transform: translateY(-3px) scale(1.02); }
+  .cta:active { transform: scale(.97); }
+  .cta svg { width: 22px; height: 22px; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+  .cta:hover svg { transform: translate(4px, -4px) rotate(-10deg); }
+
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .5);
+    transform: scale(0);
+    animation: ripple .6s ease-out forwards;
+    pointer-events: none;
+  }
+  @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+  .footer {
+    margin-top: 26px;
+    font-size: 12px;
+    color: #555;
+    letter-spacing: .05em;
+  }
+
+  /* Всплывающее уведомление */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 32px;
+    transform: translate(-50%, 30px);
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: #161616;
+    border: 1px solid var(--border);
+    color: #fff;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s, transform .3s;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .toast svg { width: 18px; height: 18px; color: #3ddc84; }
+
+  /* Телефоны */
+  @media (max-width: 480px) {
+    .card { padding: 40px 22px 32px; border-radius: 24px; }
+    .card::before { border-radius: 24px; }
+    .avatar { width: 88px; height: 88px; margin-bottom: 22px; }
+    .avatar svg { width: 46px; height: 46px; }
+    .social { width: 52px; height: 52px; border-radius: 16px; }
+    .cta { padding: 16px 22px; font-size: 16px; }
+    .blob.b1 { width: 260px; height: 260px; }
+    .blob.b2 { width: 220px; height: 220px; }
+  }
+
+  @media (hover: none) {
+    .cursor-glow { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="cursor-glow" id="glow"></div>
+
+  <main class="card" id="card">
+
+    <div class="avatar" aria-hidden="true">
+      <!-- Руль -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9.5"/>
+        <circle cx="12" cy="12" r="2.5"/>
+        <path d="M2.8 10.5c3 .2 5.5.8 6.8 1.5"/>
+        <path d="M21.2 10.5c-3 .2-5.5.8-6.8 1.5"/>
+        <path d="M12 14.5v7"/>
+      </svg>
+    </div>
+
+    <h1 class="name">
+      <span>Тамерлан</span>
+      <span>Халилов</span>
+    </h1>
+    <div class="patronymic">Тимергалеевич</div>
+
+    <div class="role"><span class="dot"></span>Автошкола</div>
+
+    <div class="divider"></div>
+
+    <div class="socials">
+      <a class="social tg" href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener" aria-label="Telegram">
+        <span class="tip">Telegram</span>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21.94 4.3a1.2 1.2 0 0 0-1.62-1.3L2.7 9.86c-1.12.44-1.1 2.03.03 2.43l4.43 1.55 1.7 5.43c.24.77 1.2 1.03 1.8.48l2.5-2.3 4.6 3.4c.7.52 1.7.13 1.88-.72L21.94 4.3ZM9.7 14.4l-.53 3.2-1.18-3.8 9.8-6.35-8.1 6.95Z"/>
+        </svg>
+      </a>
+
+      <a class="social vk" href="https://vk.ru/mashinkatmn" target="_blank" rel="noopener" aria-label="ВКонтакте">
+        <span class="tip">ВКонтакте</span>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.79 17.5c-5.47 0-8.59-3.75-8.72-9.99h2.74c.09 4.58 2.11 6.52 3.71 6.92V7.51h2.58v3.95c1.58-.17 3.24-1.97 3.8-3.95h2.58a7.62 7.62 0 0 1-3.51 4.98 7.9 7.9 0 0 1 4.11 5.01h-2.84c-.61-1.9-2.13-3.37-4.14-3.57v3.57h-.31Z"/>
+        </svg>
+      </a>
+
+      <button class="social copy" id="copyBtn" type="button" aria-label="Скопировать ник">
+        <span class="tip">Скопировать ник</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="12" height="12" rx="2.5"/>
+          <path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/>
+        </svg>
+      </button>
+
+      <button class="social share" id="shareBtn" type="button" aria-label="Поделиться">
+        <span class="tip">Поделиться</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="2.5"/>
+          <circle cx="6" cy="12" r="2.5"/>
+          <circle cx="18" cy="19" r="2.5"/>
+          <path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="handle">Telegram: <b>@Autoshkola_Mashinka</b></div>
+
+    <a class="cta" id="cta" href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener">
+      Написать мне
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 2 11 13"/>
+        <path d="M22 2 15 22l-4-9-9-4 20-7Z"/>
+      </svg>
+    </a>
+
+    <div class="footer">© <span id="year"></span> · Халилов Тамерлан Тимергалеевич</div>
+  </main>
+
+  <div class="toast" id="toast">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    <span id="toastText"></span>
+  </div>
+
+<script>
+  const card = document.getElementById('card');
+  const glow = document.getElementById('glow');
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toastText');
+  const finePointer = window.matchMedia('(hover: hover)').matches;
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // 3D-наклон карточки и свечение за курсором (только для мыши)
+  if (finePointer) {
+    document.addEventListener('mousemove', (e) => {
+      glow.style.opacity = 1;
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) / r.width;
+      const y = (e.clientY - r.top - r.height / 2) / r.height;
+      card.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+    });
+    document.addEventListener('mouseleave', () => {
+      glow.style.opacity = 0;
+      card.style.transform = '';
+    });
+  }
+
+  function showToast(text) {
+    toastText.textContent = text;
+    toast.classList.add('show');
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  // Копирование ника
+  document.getElementById('copyBtn').addEventListener('click', async () => {
+    const nick = '@Autoshkola_Mashinka';
+    try {
+      await navigator.clipboard.writeText(nick);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = nick;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    showToast('Ник скопирован: ' + nick);
+  });
+
+  // Поделиться контактом
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    const data = {
+      title: 'Халилов Тамерлан — Автошкола',
+      text: 'Халилов Тамерлан Тимергалеевич, автошкола. Telegram: @Autoshkola_Mashinka, ВКонтакте: vk.ru/mashinkatmn',
+      url: 'https://t.me/Autoshkola_Mashinka'
+    };
+    if (navigator.share) {
+      try { await navigator.share(data); } catch {}
+    } else {
+      try { await navigator.clipboard.writeText(data.text + ' — ' + data.url); } catch {}
+      showToast('Контакт скопирован');
+    }
+  });
+
+  // Волна при нажатии на кнопку
+  document.getElementById('cta').addEventListener('pointerdown', function (e) {
+    const r = this.getBoundingClientRect();
+    const size = Math.max(r.width, r.height);
+    const s = document.createElement('span');
+    s.className = 'ripple';
+    s.style.width = s.style.height = size + 'px';
+    s.style.left = (e.clientX - r.left - size / 2) + 'px';
+    s.style.top = (e.clientY - r.top - size / 2) + 'px';
+    this.appendChild(s);
+    setTimeout(() => s.remove(), 600);
+  });
+</script>
+</body>
+</html>
