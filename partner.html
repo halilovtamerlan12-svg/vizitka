@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Партнёрам — Автошкола Машинка</title>
+<meta name="description" content="Рекомендуйте автошколу «Машинка» и получайте вознаграждение за каждого клиента.">
+<meta property="og:title" content="Партнёрская программа автошколы «Машинка»">
+<meta property="og:description" content="Получите личную ссылку и QR-код, делитесь визиткой и получайте вознаграждение за клиентов.">
+<meta property="og:image" content="https://halilovtamerlan12-svg.github.io/vizitka/promo/og.png">
+<meta name="theme-color" content="#0a0a0a">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --card: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #f2f2f2;
+    --muted: #8a8a8a;
+    --g1: #00d2ff;
+    --g2: #7b5cff;
+    --g3: #ff3cac;
+    --free: #3ddc84;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px;
+    overflow-x: hidden;
+  }
+  .blob { position: fixed; border-radius: 50%; filter: blur(90px); opacity: .3; z-index: 0; pointer-events: none; }
+  .b1 { width: 360px; height: 360px; background: var(--g2); top: -120px; left: -100px; }
+  .b2 { width: 300px; height: 300px; background: var(--g3); bottom: -120px; right: -80px; }
+
+  .card {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 520px;
+    padding: 36px 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  h1 {
+    font-size: clamp(26px, 7vw, 34px);
+    font-weight: 800;
+    line-height: 1.15;
+    background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lead { margin-top: 10px; color: #cfcfcf; line-height: 1.5; }
+
+  .steps { margin: 24px 0; display: flex; flex-direction: column; gap: 10px; counter-reset: step; }
+  .step {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 14px;
+    border: 1px solid var(--border); border-radius: 14px;
+    background: rgba(255, 255, 255, .04);
+    font-size: 15px; line-height: 1.4;
+  }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    flex: none; width: 26px; height: 26px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--g1), var(--g2));
+    font-size: 13px; font-weight: 800;
+  }
+
+  label { display: block; margin-bottom: 8px; font-size: 13px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .06);
+    color: var(--text);
+    font: inherit; font-size: 17px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  input:focus { border-color: var(--g2); }
+  .hint { margin-top: 8px; font-size: 13px; color: var(--muted); }
+  .hint b { color: var(--text); }
+
+  .result { display: none; margin-top: 24px; }
+  .result.show { display: block; }
+  .link-box {
+    display: flex; gap: 8px; align-items: center;
+    padding: 10px 10px 10px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(123, 92, 255, .5);
+    background: rgba(123, 92, 255, .1);
+    word-break: break-all;
+    font-size: 14px;
+  }
+  .link-box span { flex: 1; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 16px;
+    border: 1px solid var(--border); border-radius: 12px;
+    background: rgba(255, 255, 255, .08);
+    color: var(--text);
+    font: inherit; font-size: 15px; font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .2s, background .2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:hover { background: rgba(255, 255, 255, .14); }
+  .btn:active { transform: scale(.97); }
+  .btn.main {
+    width: 100%; padding: 16px; border: none; font-size: 16px;
+    background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3));
+  }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+
+  .qr-wrap { display: flex; gap: 16px; align-items: center; margin-top: 18px; }
+  .qr { flex: none; padding: 10px; border-radius: 14px; background: #fff; line-height: 0; }
+  .qr img, .qr canvas { width: 140px !important; height: 140px !important; }
+  .qr-side { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+
+  .preview { margin-top: 18px; text-align: center; }
+  .preview img { width: 60%; max-width: 240px; border-radius: 14px; border: 1px solid var(--border); }
+
+  h2 { margin: 28px 0 12px; font-size: 18px; }
+  .tips { display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5; color: #d0d0d0; }
+  .tips b { color: var(--text); }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 32px; transform: translate(-50%, 30px);
+    padding: 12px 20px; border-radius: 12px;
+    background: #161616; border: 1px solid var(--border); color: #fff; font-size: 14px;
+    opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; z-index: 10;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  #qrHidden { position: absolute; left: -9999px; top: 0; }
+
+  @media (max-width: 420px) {
+    .card { padding: 28px 18px; }
+    .qr-wrap { flex-direction: column; align-items: stretch; }
+    .qr { align-self: center; }
+  }
+</style>
+</head>
+<body>
+  <div class="blob b1"></div><div class="blob b2"></div>
+
+  <main class="card">
+    <h1>Рекомендуйте «Машинку» — получайте вознаграждение</h1>
+    <p class="lead">Получите личную ссылку на визитку автошколы. Каждый, кто запишется по ней, будет закреплён за вами.</p>
+
+    <div class="steps">
+      <div class="step">Введите имя — получите личную ссылку, QR-код и готовую сторис.</div>
+      <div class="step">Разместите их у себя: в сторис, постах, чатах, профиле ВК или Telegram.</div>
+      <div class="step">Клиент пишет в автошколу через визитку — ваш код автоматически добавляется в сообщение.</div>
+      <div class="step">Когда клиент оплатит обучение, вы получаете вознаграждение. Условия — в чате автошколы.</div>
+    </div>
+
+    <label for="name">Ваше имя или ник</label>
+    <input id="name" type="text" autocomplete="off" placeholder="Например: Иван Петров" maxlength="40">
+    <div class="hint" id="codeHint">Ваш код партнёра появится здесь</div>
+
+    <section class="result" id="result">
+      <div class="link-box"><span id="link"></span><button class="btn" id="copyLink" type="button">Копировать</button></div>
+      <div class="row">
+        <button class="btn" id="shareLink" type="button">Поделиться</button>
+        <a class="btn" id="openLink" href="#" target="_blank" rel="noopener">Открыть визитку</a>
+      </div>
+
+      <div class="qr-wrap">
+        <div class="qr" id="qr"></div>
+        <div class="qr-side">
+          <button class="btn" id="dlQr" type="button">Скачать QR-код</button>
+          <button class="btn" id="dlStory" type="button">Скачать сторис</button>
+          <button class="btn" id="shareStory" type="button" hidden>Отправить сторис</button>
+        </div>
+      </div>
+      <div class="preview"><img id="storyPreview" alt="Сторис с вашим QR-кодом"></div>
+
+      <h2>Зарегистрируйтесь в автошколе</h2>
+      <a class="btn main" id="register" href="#" target="_blank" rel="noopener">Стать партнёром в Telegram</a>
+      <p class="hint">Отправьте сообщение с вашим кодом — так автошкола узнает, кому выплачивать вознаграждение.</p>
+    </section>
+
+    <h2>Как разместить, чтобы было удобно нажимать</h2>
+    <div class="tips">
+      <div><b>Пост в ВК или Telegram:</b> вставьте свою ссылку — появится большая картинка-превью. Текст ссылки можно стереть, картинка останется и будет открывать визитку.</div>
+      <div><b>Сторис:</b> загрузите сторис с QR-кодом и добавьте стикер «Ссылка» со своей ссылкой — подпишите его, например, «Записаться бесплатно».</div>
+      <div><b>Профиль:</b> добавьте ссылку в описание профиля или в поле «Сайт».</div>
+    </div>
+  </main>
+
+  <div id="qrHidden"></div>
+  <div class="toast" id="toast"></div>
+
+<script>
+  const SITE = 'https://halilovtamerlan12-svg.github.io/vizitka/';
+  const TG_USER = 'Autoshkola_Mashinka';
+  // Положение QR-кода на promo/story.png (1080×1920)
+  const STORY_QR = { box: [170, 1323, 249, 249], radius: 18, pad: 12 };
+
+  const $ = (id) => document.getElementById(id);
+  const nameInput = $('name');
+  let code = '', link = '', storyBlob = null;
+
+  const TRANSLIT = { а:'a', б:'b', в:'v', г:'g', д:'d', е:'e', ё:'e', ж:'zh', з:'z', и:'i', й:'y', к:'k', л:'l', м:'m', н:'n', о:'o', п:'p', р:'r', с:'s', т:'t', у:'u', ф:'f', х:'h', ц:'ts', ч:'ch', ш:'sh', щ:'sch', ъ:'', ы:'y', ь:'', э:'e', ю:'yu', я:'ya' };
+  function toCode(name) {
+    return name.toLowerCase()
+      .split('').map((c) => (c in TRANSLIT ? TRANSLIT[c] : c)).join('')
+      .replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')
+      .slice(0, 32).toUpperCase();
+  }
+
+  function showToast(text) {
+    $('toast').textContent = text;
+    $('toast').classList.add('show');
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(() => $('toast').classList.remove('show'), 2200);
+  }
+
+  const qrView = new QRCode($('qr'), { text: SITE, width: 280, height: 280, correctLevel: QRCode.CorrectLevel.M });
+  const qrHi = new QRCode($('qrHidden'), { text: SITE, width: 900, height: 900, correctLevel: QRCode.CorrectLevel.M });
+
+  const storyBg = new Image();
+  storyBg.src = 'promo/story.png';
+
+  function update() {
+    code = toCode(nameInput.value);
+    if (!code) {
+      $('result').classList.remove('show');
+      $('codeHint').textContent = 'Ваш код партнёра появится здесь';
+      return;
+    }
+    link = SITE + '?ref=' + code;
+    $('codeHint').innerHTML = 'Ваш код партнёра: <b>' + code + '</b>';
+    $('link').textContent = link;
+    $('openLink').href = link;
+    $('register').href = 'https://t.me/' + TG_USER + '?text=' +
+      encodeURIComponent('Здравствуйте! Хочу стать партнёром автошколы.\nИмя: ' + nameInput.value.trim() + '\nКод партнёра: ' + code);
+    qrView.makeCode(link);
+    qrHi.makeCode(link);
+    $('result').classList.add('show');
+    clearTimeout(update.t);
+    update.t = setTimeout(renderStory, 300);
+  }
+  nameInput.addEventListener('input', update);
+
+  function qrCanvas() { return $('qrHidden').querySelector('canvas'); }
+
+  function renderStory() {
+    if (!storyBg.complete || !storyBg.naturalWidth) { storyBg.onload = renderStory; return; }
+    const c = document.createElement('canvas');
+    c.width = storyBg.naturalWidth; c.height = storyBg.naturalHeight;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(storyBg, 0, 0);
+    const [x, y, w, h] = STORY_QR.box;
+    const r = STORY_QR.radius;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); ctx.fill();
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(qrCanvas(), x + STORY_QR.pad, y + STORY_QR.pad, w - STORY_QR.pad * 2, h - STORY_QR.pad * 2);
+    c.toBlob((b) => {
+      storyBlob = b;
+      const old = $('storyPreview').src;
+      $('storyPreview').src = URL.createObjectURL(b);
+      if (old.startsWith('blob:')) URL.revokeObjectURL(old);
+      const file = new File([b], 'mashinka-story-' + code + '.png', { type: 'image/png' });
+      $('shareStory').hidden = !(navigator.canShare && navigator.canShare({ files: [file] }));
+    }, 'image/png');
+  }
+
+  function download(blob, name) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+
+  $('copyLink').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(link); showToast('Ссылка скопирована'); }
+    catch { showToast('Не удалось скопировать — выделите ссылку вручную'); }
+  });
+  $('shareLink').addEventListener('click', async () => {
+    const data = { title: 'Автошкола «Машинка»', text: 'Бесплатное пробное вождение и занятие по теории — запись в один клик:', url: link };
+    if (navigator.share) { try { await navigator.share(data); } catch {} }
+    else { try { await navigator.clipboard.writeText(data.text + ' ' + link); showToast('Текст со ссылкой скопирован'); } catch {} }
+  });
+  $('dlQr').addEventListener('click', () => qrCanvas().toBlob((b) => download(b, 'mashinka-qr-' + code + '.png')));
+  $('dlStory').addEventListener('click', () => storyBlob && download(storyBlob, 'mashinka-story-' + code + '.png'));
+  $('shareStory').addEventListener('click', async () => {
+    if (!storyBlob) return;
+    const file = new File([storyBlob], 'mashinka-story-' + code + '.png', { type: 'image/png' });
+    try { await navigator.share({ files: [file], title: 'Автошкола «Машинка»' }); } catch {}
+  });
+</script>
+</body>
+</html>

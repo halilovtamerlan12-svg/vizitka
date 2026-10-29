@@ -465,6 +465,8 @@
     color: #555;
     letter-spacing: .05em;
   }
+  .footer a { color: #777; text-decoration: underline; text-underline-offset: 3px; }
+  .footer a:hover { color: var(--text); }
 
   /* Всплывающее уведомление */
   .toast {
@@ -636,7 +638,7 @@
       </svg>
     </a>
 
-    <div class="footer">© <span id="year"></span> · Автошкола «Машинка»</div>
+    <div class="footer">© <span id="year"></span> · Автошкола «Машинка» · <a href="partner.html">Партнёрская программа</a></div>
   </main>
 
   <div class="toast" id="toast">
@@ -696,10 +698,12 @@
 
   // Поделиться контактом
   document.getElementById('shareBtn').addEventListener('click', async () => {
+    // Делимся визиткой; если открыта по партнёрской ссылке — код партнёра сохраняется
+    const site = 'https://halilovtamerlan12-svg.github.io/vizitka/' + (ref ? '?ref=' + ref : '');
     const data = {
       title: 'Автошкола Машинка',
       text: 'Автошкола «Машинка». Telegram: @Autoshkola_Mashinka, ВКонтакте: vk.ru/mashinkatmn',
-      url: 'https://t.me/Autoshkola_Mashinka'
+      url: site
     };
     if (navigator.share) {
       try { await navigator.share(data); } catch {}
@@ -712,8 +716,25 @@
   // Ссылки в Telegram: data-msg подставляется в поле ввода чата.
   // На телефоне чат открывается сразу в приложении (tg://), а если его нет — обычная ссылка t.me
   const TG_USER = 'Autoshkola_Mashinka';
+
+  // Партнёрский код из ссылки вида ?ref=IVAN — добавляется в сообщение, чтобы было видно, кто привёл клиента.
+  // Запоминается на 30 дней, если человек вернётся на визитку позже без кода в ссылке.
+  const REF_KEY = 'mashinka_ref';
+  const cleanRef = (v) => (v || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 32).toUpperCase();
+  let ref = cleanRef(new URLSearchParams(location.search).get('ref'));
+  try {
+    if (ref) {
+      localStorage.setItem(REF_KEY, JSON.stringify({ ref, t: Date.now() }));
+    } else {
+      const saved = JSON.parse(localStorage.getItem(REF_KEY) || 'null');
+      if (saved && Date.now() - saved.t < 30 * 24 * 3600 * 1000) ref = cleanRef(saved.ref);
+    }
+  } catch {}
+
   document.querySelectorAll('[data-tg]').forEach((link) => {
-    const text = link.dataset.msg ? 'text=' + encodeURIComponent(link.dataset.msg) : '';
+    let msg = link.dataset.msg || '';
+    if (ref) msg = (msg || 'Здравствуйте!') + '\n\nКод партнёра: ' + ref;
+    const text = msg ? 'text=' + encodeURIComponent(msg) : '';
     link.href = 'https://t.me/' + TG_USER + (text ? '?' + text : '');
     link.addEventListener('click', (e) => {
       if (finePointer) return; // на компьютере t.me и так открывает нужный чат
