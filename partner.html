@@ -6,21 +6,21 @@
 <title>Партнёрам — Автошкола Машинка</title>
 <meta name="description" content="Рекомендуйте автошколу «Машинка» и получайте вознаграждение за каждого клиента.">
 <meta property="og:title" content="Партнёрская программа автошколы «Машинка»">
-<meta property="og:description" content="Получите личную ссылку и QR-код, делитесь визиткой и получайте вознаграждение за клиентов.">
+<meta property="og:description" content="Получите личную ссылку и QR-код, отправляйте визитку знакомым и получайте вознаграждение за клиентов.">
 <meta property="og:image" content="https://halilovtamerlan12-svg.github.io/vizitka/promo/og.png">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="theme-color" content="#070707">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   :root {
-    --bg: #0a0a0a;
+    --bg: #070707;
     --card: rgba(255, 255, 255, 0.03);
     --border: rgba(255, 255, 255, 0.08);
     --text: #f2f2f2;
     --muted: #8a8a8a;
-    --g1: #00d2ff;
-    --g2: #7b5cff;
-    --g3: #ff3cac;
-    --free: #3ddc84;
+    --g1: #ff2a2a;
+    --g2: #e30000;
+    --g3: #8f0000;
+    --free: #ff3b30;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -55,6 +55,7 @@
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  .logo { display: block; width: 120px; height: auto; margin: 0 auto 18px; border-radius: 16px; }
   .lead { margin-top: 10px; color: #cfcfcf; line-height: 1.5; }
 
   .steps { margin: 24px 0; display: flex; flex-direction: column; gap: 10px; counter-reset: step; }
@@ -87,6 +88,15 @@
   }
   input:focus { border-color: var(--g2); }
   .hint { margin-top: 8px; font-size: 13px; color: var(--muted); }
+  .rules {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 24px; padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(225, 6, 0, .5);
+    background: rgba(225, 6, 0, .08);
+    font-size: 14px; line-height: 1.45; color: #e0e0e0;
+  }
+  .rules b { color: #fff; font-size: 15px; }
   .hint b { color: var(--text); }
 
   .result { display: none; margin-top: 24px; }
@@ -95,8 +105,8 @@
     display: flex; gap: 8px; align-items: center;
     padding: 10px 10px 10px 14px;
     border-radius: 14px;
-    border: 1px solid rgba(123, 92, 255, .5);
-    background: rgba(123, 92, 255, .1);
+    border: 1px solid rgba(225, 6, 0, .5);
+    background: rgba(225, 6, 0, .1);
     word-break: break-all;
     font-size: 14px;
   }
@@ -118,7 +128,8 @@
   .btn:active { transform: scale(.97); }
   .btn.main {
     width: 100%; padding: 16px; border: none; font-size: 16px;
-    background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3));
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    box-shadow: 0 8px 30px -10px rgba(34, 197, 94, .8);
   }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
 
@@ -154,14 +165,22 @@
   <div class="blob b1"></div><div class="blob b2"></div>
 
   <main class="card">
+    <img class="logo" src="promo/logo.webp" alt="Автошкола «Машинка»" width="977" height="1024">
     <h1>Рекомендуйте «Машинку» — получайте вознаграждение</h1>
     <p class="lead">Получите личную ссылку на визитку автошколы. Каждый, кто запишется по ней, будет закреплён за вами.</p>
 
     <div class="steps">
-      <div class="step">Введите имя — получите личную ссылку, QR-код и готовую сторис.</div>
-      <div class="step">Разместите их у себя: в сторис, постах, чатах, профиле ВК или Telegram.</div>
+      <div class="step">Введите имя — получите личную ссылку и QR-код.</div>
+      <div class="step">Отправляйте ссылку знакомым в личные сообщения — во ВКонтакте или Max.</div>
       <div class="step">Клиент пишет в автошколу через визитку — ваш код автоматически добавляется в сообщение.</div>
-      <div class="step">Когда клиент оплатит обучение, вы получаете вознаграждение. Условия — в чате автошколы.</div>
+      <div class="step">Когда клиент оплатит обучение, вы получаете вознаграждение. Условия уточняйте у автошколы.</div>
+    </div>
+
+    <div class="rules">
+      <b>Важно — правила размещения</b>
+      <div>✅ Личные сообщения знакомым во ВКонтакте и Max — можно всегда.</div>
+      <div>⚠️ Открытые посты, сторис, описание профиля — только с маркировкой рекламы. Сначала напишите в автошколу: мы дадим готовый текст с пометкой «Реклама» и кодом erid.</div>
+      <div>⛔ Нельзя размещать в Instagram, Facebook, Telegram и YouTube — реклама там запрещена законом.</div>
     </div>
 
     <label for="name">Ваше имя или ник</label>
@@ -186,15 +205,19 @@
       <div class="preview"><img id="storyPreview" alt="Сторис с вашим QR-кодом"></div>
 
       <h2>Зарегистрируйтесь в автошколе</h2>
-      <a class="btn main" id="register" href="#" target="_blank" rel="noopener">Стать партнёром в Telegram</a>
-      <p class="hint">Отправьте сообщение с вашим кодом — так автошкола узнает, кому выплачивать вознаграждение.</p>
+      <a class="btn main" id="register" href="https://vk.me/mashinkatmn" target="_blank" rel="noopener">Стать партнёром — ВКонтакте</a>
+      <div class="row">
+        <button class="btn" id="registerMax" type="button">Через Max</button>
+        <a class="btn" href="tel:+79923008877">Позвонить</a>
+      </div>
+      <p class="hint" id="registerHint">Текст заявки с вашим кодом скопируется — вставьте его в чат. Так автошкола узнает, кому выплачивать вознаграждение.</p>
     </section>
 
-    <h2>Как разместить, чтобы было удобно нажимать</h2>
+    <h2>Как отправить ссылку, чтобы было удобно нажимать</h2>
     <div class="tips">
-      <div><b>Пост в ВК или Telegram:</b> вставьте свою ссылку — появится большая картинка-превью. Текст ссылки можно стереть, картинка останется и будет открывать визитку.</div>
-      <div><b>Сторис:</b> загрузите сторис с QR-кодом и добавьте стикер «Ссылка» со своей ссылкой — подпишите его, например, «Записаться бесплатно».</div>
-      <div><b>Профиль:</b> добавьте ссылку в описание профиля или в поле «Сайт».</div>
+      <div><b>В личном сообщении ВКонтакте:</b> вставьте свою ссылку — появится большая картинка-превью. Текст ссылки можно стереть, картинка останется и будет открывать визитку.</div>
+      <div><b>В Max:</b> просто отправьте ссылку или картинку с QR-кодом.</div>
+      <div><b>При встрече:</b> покажите QR-код с экрана телефона — его можно отсканировать камерой.</div>
     </div>
   </main>
 
@@ -203,9 +226,10 @@
 
 <script>
   const SITE = 'https://halilovtamerlan12-svg.github.io/vizitka/';
-  const TG_USER = 'Autoshkola_Mashinka';
+  const PHONE = '+79923008877';
+  let registerText = '';
   // Положение QR-кода на promo/story.png (1080×1920)
-  const STORY_QR = { box: [170, 1323, 249, 249], radius: 18, pad: 12 };
+  const STORY_QR = { box: [188, 1416, 249, 249], radius: 18, pad: 12 };
 
   const $ = (id) => document.getElementById(id);
   const nameInput = $('name');
@@ -243,8 +267,7 @@
     $('codeHint').innerHTML = 'Ваш код партнёра: <b>' + code + '</b>';
     $('link').textContent = link;
     $('openLink').href = link;
-    $('register').href = 'https://t.me/' + TG_USER + '?text=' +
-      encodeURIComponent('Здравствуйте! Хочу стать партнёром автошколы.\nИмя: ' + nameInput.value.trim() + '\nКод партнёра: ' + code);
+    registerText = 'Здравствуйте! Хочу стать партнёром автошколы.\nИмя: ' + nameInput.value.trim() + '\nКод партнёра: ' + code;
     qrView.makeCode(link);
     qrHi.makeCode(link);
     $('result').classList.add('show');
@@ -295,6 +318,17 @@
     const data = { title: 'Автошкола «Машинка»', text: 'Бесплатное пробное вождение и занятие по теории — запись в один клик:', url: link };
     if (navigator.share) { try { await navigator.share(data); } catch {} }
     else { try { await navigator.clipboard.writeText(data.text + ' ' + link); showToast('Текст со ссылкой скопирован'); } catch {} }
+  });
+  // ВК и Max не подставляют текст по ссылке — копируем заявку, партнёр вставляет её в чат
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text).catch(() => {});
+    return Promise.resolve();
+  }
+  $('register').addEventListener('click', () => { copyText(registerText); showToast('Текст заявки скопирован — вставьте его в чат'); });
+  $('registerMax').addEventListener('click', () => {
+    copyText(registerText);
+    $('registerHint').innerHTML = 'Текст заявки скопирован. Откройте Max, найдите нас по номеру <b>+7 992 300-88-77</b> и вставьте сообщение.';
+    showToast('Текст заявки скопирован');
   });
   $('dlQr').addEventListener('click', () => qrCanvas().toBlob((b) => download(b, 'mashinka-qr-' + code + '.png')));
   $('dlStory').addEventListener('click', () => storyBlob && download(storyBlob, 'mashinka-story-' + code + '.png'));

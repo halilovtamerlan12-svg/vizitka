@@ -4,28 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Автошкола Машинка</title>
-<meta name="description" content="Бесплатное пробное вождение, индивидуальная теория, восстановление навыков, дополнительное вождение на АКПП и МКПП. Запись в Telegram.">
+<meta name="description" content="Бесплатное пробное вождение, индивидуальная теория, восстановление навыков, дополнительное вождение на АКПП и МКПП. Запись во ВКонтакте и Max.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Автошкола «Машинка»">
 <meta property="og:title" content="Автошкола «Машинка» — обучение вождению">
-<meta property="og:description" content="Бесплатное пробное вождение и ознакомительное занятие по теории. Запись в один клик через Telegram.">
+<meta property="og:description" content="Бесплатное пробное вождение и ознакомительное занятие по теории. Запись в один клик во ВКонтакте или Max.">
 <meta property="og:url" content="https://halilovtamerlan12-svg.github.io/vizitka/">
 <meta property="og:image" content="https://halilovtamerlan12-svg.github.io/vizitka/promo/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="theme-color" content="#070707">
 <style>
   :root {
-    --bg: #0a0a0a;
+    --bg: #070707;
     --card: rgba(255, 255, 255, 0.03);
     --border: rgba(255, 255, 255, 0.08);
     --text: #f2f2f2;
     --muted: #8a8a8a;
-    --g1: #00d2ff;
-    --g2: #7b5cff;
-    --g3: #ff3cac;
-    --tg: #29a9eb;
+    --g1: #ff2a2a;
+    --g2: #e30000;
+    --g3: #8f0000;
+    --max: #22c55e;
+    --go: #22c55e;
+    --go2: #16a34a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -70,7 +72,7 @@
     position: fixed;
     width: 500px; height: 500px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(123, 92, 255, 0.15), transparent 60%);
+    background: radial-gradient(circle, rgba(225, 6, 0, 0.15), transparent 60%);
     pointer-events: none;
     transform: translate(-50%, -50%);
     z-index: 0;
@@ -157,6 +159,10 @@
     75% { transform: rotate(25deg); }
   }
 
+  /* Логотип */
+  .logo { margin: -8px auto 0; line-height: 0; }
+  .logo img { display: block; width: min(260px, 70vw); height: auto; margin: 0 auto; border-radius: 22px; }
+
   /* Имя */
   .name {
     font-size: clamp(30px, 8vw, 44px);
@@ -169,7 +175,7 @@
             background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 8s linear infinite;
-    filter: drop-shadow(0 0 18px rgba(123, 92, 255, .55)) drop-shadow(0 0 40px rgba(255, 60, 172, .25));
+    filter: drop-shadow(0 0 18px rgba(225, 6, 0, .55)) drop-shadow(0 0 40px rgba(158, 0, 0, .25));
   }
   .name span { display: block; }
   .patronymic {
@@ -199,8 +205,8 @@
   .role .dot {
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: #3ddc84;
-    box-shadow: 0 0 10px #3ddc84;
+    background: var(--go);
+    box-shadow: 0 0 10px var(--go);
     animation: pulse 2s ease-in-out infinite;
   }
   @keyframes pulse {
@@ -247,9 +253,9 @@
   }
   .social:hover svg { transform: rotate(-8deg) scale(1.08); }
   .social:active { transform: translateY(-2px) scale(.96); }
-  .social.tg { --c: var(--tg); }
   .social.vk { --c: #0077ff; }
-  .social.copy { --c: var(--g2); }
+  .social.max { --c: var(--max); }
+  .social.call { --c: var(--g1); }
   .social.share { --c: var(--g3); }
 
   .social .tip {
@@ -315,9 +321,9 @@
   }
   .service:hover, .service:focus-visible {
     transform: translateY(-2px);
-    border-color: rgba(123, 92, 255, .6);
-    background: rgba(123, 92, 255, .12);
-    box-shadow: 0 8px 24px -10px rgba(123, 92, 255, .8);
+    border-color: rgba(225, 6, 0, .6);
+    background: rgba(225, 6, 0, .12);
+    box-shadow: 0 8px 24px -10px rgba(225, 6, 0, .8);
     outline: none;
   }
   .service:active { transform: scale(.98); }
@@ -327,7 +333,7 @@
     display: grid;
     place-items: center;
     border-radius: 12px;
-    background: linear-gradient(135deg, rgba(0, 210, 255, .18), rgba(123, 92, 255, .18));
+    background: linear-gradient(135deg, rgba(255, 75, 62, .18), rgba(225, 6, 0, .18));
     font-size: 19px;
   }
   .service .label { flex: 1; }
@@ -340,21 +346,21 @@
   .service:hover .arrow { color: #fff; transform: translateX(3px); }
 
   .service.free {
-    border-color: rgba(61, 220, 132, .35);
-    background: linear-gradient(135deg, rgba(61, 220, 132, .12), rgba(0, 210, 255, .06));
+    border-color: rgba(34, 197, 94, .45);
+    background: linear-gradient(135deg, rgba(34, 197, 94, .14), rgba(22, 163, 74, .05));
   }
   .service.free:hover, .service.free:focus-visible {
-    border-color: rgba(61, 220, 132, .8);
-    background: linear-gradient(135deg, rgba(61, 220, 132, .2), rgba(0, 210, 255, .1));
-    box-shadow: 0 8px 24px -10px rgba(61, 220, 132, .8);
+    border-color: rgba(34, 197, 94, .9);
+    background: linear-gradient(135deg, rgba(34, 197, 94, .24), rgba(22, 163, 74, .1));
+    box-shadow: 0 8px 24px -10px rgba(34, 197, 94, .8);
   }
   .badge {
     display: inline-block;
     margin-bottom: 3px;
     padding: 2px 8px;
     border-radius: 999px;
-    background: #3ddc84;
-    color: #062b16;
+    background: var(--go);
+    color: #052e14;
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .08em;
@@ -362,7 +368,7 @@
   }
 
   /* Выбор коробки передач */
-  .service[aria-expanded="true"] { border-color: rgba(123, 92, 255, .6); background: rgba(123, 92, 255, .12); }
+  .service[aria-expanded="true"] { border-color: rgba(225, 6, 0, .6); background: rgba(225, 6, 0, .12); }
   .service[aria-expanded="true"] .arrow { transform: rotate(90deg); }
   .gearbox {
     display: grid;
@@ -419,15 +425,15 @@
     cursor: pointer;
     overflow: hidden;
     isolation: isolate;
-    background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3), var(--g1));
+    background: linear-gradient(90deg, var(--go), var(--go2), #15803d, var(--go));
     background-size: 300% 100%;
     animation: shine 6s linear infinite, breathe 3s ease-in-out infinite;
     transition: transform .25s cubic-bezier(.3, 1.6, .5, 1);
     -webkit-tap-highlight-color: transparent;
   }
   @keyframes breathe {
-    0%, 100% { box-shadow: 0 8px 30px -8px rgba(123, 92, 255, .7); }
-    50% { box-shadow: 0 8px 50px -4px rgba(255, 60, 172, .8); }
+    0%, 100% { box-shadow: 0 8px 30px -8px rgba(34, 197, 94, .6); }
+    50% { box-shadow: 0 8px 50px -4px rgba(34, 197, 94, .85); }
   }
   /* Блик, пробегающий по кнопке */
   .cta::before {
@@ -489,7 +495,83 @@
     gap: 8px;
   }
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
-  .toast svg { width: 18px; height: 18px; color: #3ddc84; }
+  .toast svg { width: 18px; height: 18px; color: #ff3b30; }
+
+  /* Окно «Куда написать?» */
+  .sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, .7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .sheet[hidden] { display: none; }
+  .sheet-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 22px 18px 16px;
+    border-radius: 22px;
+    border: 1px solid rgba(225, 6, 0, .45);
+    background: #111;
+    box-shadow: 0 -10px 40px -10px rgba(225, 6, 0, .5);
+    animation: appear .35s cubic-bezier(.2, .8, .2, 1) both;
+  }
+  .sheet-title { font-size: 19px; font-weight: 800; text-align: center; margin-bottom: 12px; }
+  .sheet-msg {
+    margin-bottom: 14px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid var(--border);
+    color: #cfcfcf;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: pre-line;
+  }
+  .ch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .06);
+    color: var(--text);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ch.vk { background: #0077ff; border-color: #0077ff; }
+  .ch.max { background: linear-gradient(90deg, var(--go), var(--go2)); border: none; }
+  .ch.call { background: rgba(227, 0, 0, .18); border-color: rgba(227, 0, 0, .5); }
+  .ch.small { margin: 8px 0 4px; padding: 11px; font-size: 14px; }
+  .ch:active { transform: scale(.98); }
+  .sheet-note, .sheet-ref { font-size: 13px; color: var(--muted); text-align: center; line-height: 1.4; }
+  .sheet-ref { margin-top: 8px; color: #ff8a80; }
+  .steps-max { padding-left: 20px; font-size: 14px; line-height: 1.45; color: #d6d6d6; }
+  .steps-max li { margin-bottom: 10px; }
+  .sheet-close {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+  }
 
   /* Телефоны */
   @media (max-width: 480px) {
@@ -521,48 +603,34 @@
 
   <main class="card" id="card">
 
-    <div class="avatar" aria-hidden="true">
-      <!-- Руль -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="9.5"/>
-        <circle cx="12" cy="12" r="2.5"/>
-        <path d="M2.8 10.5c3 .2 5.5.8 6.8 1.5"/>
-        <path d="M21.2 10.5c-3 .2-5.5.8-6.8 1.5"/>
-        <path d="M12 14.5v7"/>
-      </svg>
-    </div>
-
-    <h1 class="name">
-      <span>Автошкола</span>
-      <span>Машинка</span>
-    </h1>
+    <h1 class="logo"><img src="promo/logo.webp" alt="Автошкола «Машинка»" width="977" height="1024"></h1>
 
     <div class="role"><span class="dot"></span>Обучение вождению</div>
 
     <div class="divider"></div>
 
     <div class="socials">
-      <a class="social tg" data-tg href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener" aria-label="Telegram">
-        <span class="tip">Telegram</span>
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M21.94 4.3a1.2 1.2 0 0 0-1.62-1.3L2.7 9.86c-1.12.44-1.1 2.03.03 2.43l4.43 1.55 1.7 5.43c.24.77 1.2 1.03 1.8.48l2.5-2.3 4.6 3.4c.7.52 1.7.13 1.88-.72L21.94 4.3ZM9.7 14.4l-.53 3.2-1.18-3.8 9.8-6.35-8.1 6.95Z"/>
-        </svg>
-      </a>
-
-      <a class="social vk" href="https://vk.ru/mashinkatmn" target="_blank" rel="noopener" aria-label="ВКонтакте">
+      <a class="social vk" href="https://vk.me/mashinkatmn" target="_blank" rel="noopener" aria-label="Написать во ВКонтакте">
         <span class="tip">ВКонтакте</span>
         <svg viewBox="0 0 24 24" fill="currentColor">
           <path d="M12.79 17.5c-5.47 0-8.59-3.75-8.72-9.99h2.74c.09 4.58 2.11 6.52 3.71 6.92V7.51h2.58v3.95c1.58-.17 3.24-1.97 3.8-3.95h2.58a7.62 7.62 0 0 1-3.51 4.98 7.9 7.9 0 0 1 4.11 5.01h-2.84c-.61-1.9-2.13-3.37-4.14-3.57v3.57h-.31Z"/>
         </svg>
       </a>
 
-      <button class="social copy" id="copyBtn" type="button" aria-label="Скопировать ник">
-        <span class="tip">Скопировать ник</span>
+      <button class="social max" id="maxBtn" type="button" aria-label="Написать в Max">
+        <span class="tip">Max</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="12" height="12" rx="2.5"/>
-          <path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/>
+          <path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/>
+          <path d="M8 15V9l4 4 4-4v6"/>
         </svg>
       </button>
+
+      <a class="social call" href="tel:+79923008877" aria-label="Позвонить">
+        <span class="tip">Позвонить</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/>
+        </svg>
+      </a>
 
       <button class="social share" id="shareBtn" type="button" aria-label="Поделиться">
         <span class="tip">Поделиться</span>
@@ -575,23 +643,23 @@
       </button>
     </div>
 
-    <div class="handle">Telegram: <b>@Autoshkola_Mashinka</b></div>
+    <div class="handle">ВКонтакте: <b>vk.ru/mashinkatmn</b><br>Max и телефон: <b>+7 992 300-88-77</b></div>
 
     <div class="services-title">Записаться в один клик</div>
     <nav class="services" aria-label="Услуги">
-      <a class="service free" data-tg data-msg="Здравствуйте! Хочу записаться на бесплатное пробное вождение." href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener">
+      <a class="service free" data-msg="Здравствуйте! Хочу записаться на бесплатное пробное вождение." href="#">
         <span class="ico" aria-hidden="true">🚗</span>
         <span class="label"><span class="badge">Бесплатно</span><br>Записаться на пробное вождение</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
       </a>
 
-      <a class="service free" data-tg data-msg="Здравствуйте! Хочу записаться на бесплатное ознакомительное занятие по теории." href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener">
+      <a class="service free" data-msg="Здравствуйте! Хочу записаться на бесплатное ознакомительное занятие по теории." href="#">
         <span class="ico" aria-hidden="true">📖</span>
         <span class="label"><span class="badge">Бесплатно</span><br>Ознакомительное занятие по теории</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
       </a>
 
-      <a class="service" data-tg data-msg="Здравствуйте! Хочу восстановить навыки вождения." href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener">
+      <a class="service" data-msg="Здравствуйте! Хочу восстановить навыки вождения." href="#">
         <span class="ico" aria-hidden="true">🔄</span>
         <span class="label">Восстановление навыков вождения</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
@@ -603,34 +671,34 @@
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
       </button>
       <div class="gearbox" id="gearbox">
-        <a class="gear" data-tg data-msg="Здравствуйте! Хочу записаться на дополнительное вождение на АКПП." href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener" tabindex="-1">
+        <a class="gear" data-msg="Здравствуйте! Хочу записаться на дополнительное вождение на АКПП." href="#" tabindex="-1">
           <b>АКПП</b><small>автомат</small>
         </a>
-        <a class="gear" data-tg data-msg="Здравствуйте! Хочу записаться на дополнительное вождение на МКПП." href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener" tabindex="-1">
+        <a class="gear" data-msg="Здравствуйте! Хочу записаться на дополнительное вождение на МКПП." href="#" tabindex="-1">
           <b>МКПП</b><small>механика</small>
         </a>
       </div>
 
-      <a class="service" data-tg data-msg="Здравствуйте! Хочу записаться на индивидуальную теорию." href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener">
+      <a class="service" data-msg="Здравствуйте! Хочу записаться на индивидуальную теорию." href="#">
         <span class="ico" aria-hidden="true">🎓</span>
         <span class="label">Записаться на индивидуальную теорию</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
       </a>
 
-      <a class="service" data-tg data-msg="Здравствуйте! Хочу сдать с вами экзамен." href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener">
+      <a class="service" data-msg="Здравствуйте! Хочу сдать с вами экзамен." href="#">
         <span class="ico" aria-hidden="true">🏁</span>
         <span class="label">Хочу сдать с вами экзамен</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
       </a>
 
-      <a class="service" data-tg data-msg="Здравствуйте! Расскажите, пожалуйста, о вашей методике преподавания." href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener">
+      <a class="service" data-msg="Здравствуйте! Расскажите, пожалуйста, о вашей методике преподавания." href="#">
         <span class="ico" aria-hidden="true">💡</span>
         <span class="label">Узнать о методике преподавания</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
       </a>
     </nav>
 
-    <a class="cta" id="cta" data-tg href="https://t.me/Autoshkola_Mashinka" target="_blank" rel="noopener">
+    <a class="cta" id="cta" data-msg="Здравствуйте!" href="#">
       Написать нам
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M22 2 11 13"/>
@@ -640,6 +708,28 @@
 
     <div class="footer">© <span id="year"></span> · Автошкола «Машинка» · <a href="partner.html">Партнёрская программа</a></div>
   </main>
+
+  <!-- Выбор, куда написать: ВКонтакте / Max / звонок -->
+  <div class="sheet" id="sheet" hidden>
+    <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="sheet-title" id="sheetTitle">Куда написать?</div>
+      <div class="sheet-msg" id="sheetMsg"></div>
+      <div id="sheetMain">
+        <a class="ch vk" id="chVk" href="https://vk.me/mashinkatmn" target="_blank" rel="noopener">ВКонтакте</a>
+        <button class="ch max" id="chMax" type="button">Max</button>
+        <a class="ch call" href="tel:+79923008877">Позвонить</a>
+        <div class="sheet-note">Текст сообщения скопируется — просто вставьте его в чат.</div>
+      </div>
+      <div id="sheetMaxSteps" hidden>
+        <ol class="steps-max">
+          <li>Скопируйте номер и найдите нас в Max:<br><button class="ch small" id="copyPhone" type="button">+7 992 300-88-77 — скопировать</button></li>
+          <li>Скопируйте сообщение и вставьте в чат:<br><button class="ch small" id="copyMsg" type="button">Скопировать сообщение</button></li>
+        </ol>
+      </div>
+      <div class="sheet-ref" id="sheetRef" hidden></div>
+      <button class="sheet-close" id="sheetClose" type="button">Закрыть</button>
+    </div>
+  </div>
 
   <div class="toast" id="toast">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
@@ -680,43 +770,6 @@
     showToast.t = setTimeout(() => toast.classList.remove('show'), 2200);
   }
 
-  // Копирование ника
-  document.getElementById('copyBtn').addEventListener('click', async () => {
-    const nick = '@Autoshkola_Mashinka';
-    try {
-      await navigator.clipboard.writeText(nick);
-    } catch {
-      const ta = document.createElement('textarea');
-      ta.value = nick;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
-    }
-    showToast('Ник скопирован: ' + nick);
-  });
-
-  // Поделиться контактом
-  document.getElementById('shareBtn').addEventListener('click', async () => {
-    // Делимся визиткой; если открыта по партнёрской ссылке — код партнёра сохраняется
-    const site = 'https://halilovtamerlan12-svg.github.io/vizitka/' + (ref ? '?ref=' + ref : '');
-    const data = {
-      title: 'Автошкола Машинка',
-      text: 'Автошкола «Машинка». Telegram: @Autoshkola_Mashinka, ВКонтакте: vk.ru/mashinkatmn',
-      url: site
-    };
-    if (navigator.share) {
-      try { await navigator.share(data); } catch {}
-    } else {
-      try { await navigator.clipboard.writeText(data.text + ' — ' + data.url); } catch {}
-      showToast('Контакт скопирован');
-    }
-  });
-
-  // Ссылки в Telegram: data-msg подставляется в поле ввода чата.
-  // На телефоне чат открывается сразу в приложении (tg://), а если его нет — обычная ссылка t.me
-  const TG_USER = 'Autoshkola_Mashinka';
-
   // Партнёрский код из ссылки вида ?ref=IVAN — добавляется в сообщение, чтобы было видно, кто привёл клиента.
   // Запоминается на 30 дней, если человек вернётся на визитку позже без кода в ссылке.
   const REF_KEY = 'mashinka_ref';
@@ -731,27 +784,86 @@
     }
   } catch {}
 
-  document.querySelectorAll('[data-tg]').forEach((link) => {
-    let msg = link.dataset.msg || '';
-    if (ref) msg = (msg || 'Здравствуйте!') + '\n\nКод партнёра: ' + ref;
-    const text = msg ? 'text=' + encodeURIComponent(msg) : '';
-    link.href = 'https://t.me/' + TG_USER + (text ? '?' + text : '');
-    link.addEventListener('click', (e) => {
-      if (finePointer) return; // на компьютере t.me и так открывает нужный чат
-      e.preventDefault();
-      const web = link.href;
-      const app = 'tg://resolve?domain=' + TG_USER + (text ? '&' + text : '');
-      let left = false;
-      const onHide = () => { left = true; };
-      document.addEventListener('visibilitychange', onHide, { once: true });
-      window.addEventListener('blur', onHide, { once: true });
-      window.location.href = app;
-      setTimeout(() => {
-        document.removeEventListener('visibilitychange', onHide);
-        window.removeEventListener('blur', onHide);
-        if (!left && !document.hidden) window.location.href = web;
-      }, 1500);
-    });
+  const PHONE = '+79923008877';
+
+  function copyText(text) {
+    // Запускаем копирование прямо в обработчике нажатия, иначе телефон его запретит
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).catch(() => legacyCopy(text));
+    }
+    legacyCopy(text);
+    return Promise.resolve();
+  }
+  function legacyCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch {}
+    ta.remove();
+  }
+
+  // Окно выбора: ВКонтакте / Max / звонок. ВК и Max не умеют подставлять текст по ссылке,
+  // поэтому сообщение (с кодом партнёра) копируется — клиенту остаётся вставить его в чат.
+  const sheet = document.getElementById('sheet');
+  const sheetMain = document.getElementById('sheetMain');
+  const sheetMaxSteps = document.getElementById('sheetMaxSteps');
+  const sheetRef = document.getElementById('sheetRef');
+  let currentMsg = '';
+
+  function openSheet(msg) {
+    currentMsg = (msg || 'Здравствуйте!') + (ref ? '\n\nКод партнёра: ' + ref : '');
+    document.getElementById('sheetMsg').textContent = currentMsg;
+    sheetMain.hidden = false;
+    sheetMaxSteps.hidden = true;
+    sheetRef.hidden = !ref;
+    if (ref) sheetRef.textContent = 'Если будете звонить, назовите код партнёра: ' + ref;
+    sheet.hidden = false;
+  }
+  function closeSheet() { sheet.hidden = true; }
+
+  document.querySelectorAll('[data-msg]').forEach((el) => {
+    el.addEventListener('click', (e) => { e.preventDefault(); openSheet(el.dataset.msg); });
+  });
+  document.getElementById('maxBtn').addEventListener('click', () => { openSheet('Здравствуйте!'); showMaxSteps(); });
+
+  document.getElementById('chVk').addEventListener('click', () => {
+    copyText(currentMsg);
+    showToast('Текст скопирован — вставьте его в чат');
+    setTimeout(closeSheet, 300);
+  });
+  function showMaxSteps() {
+    sheetMain.hidden = true;
+    sheetMaxSteps.hidden = false;
+  }
+  document.getElementById('chMax').addEventListener('click', showMaxSteps);
+  document.getElementById('copyPhone').addEventListener('click', () => {
+    copyText(PHONE).then(() => showToast('Номер скопирован'));
+  });
+  document.getElementById('copyMsg').addEventListener('click', () => {
+    copyText(currentMsg).then(() => showToast('Сообщение скопировано'));
+  });
+  document.getElementById('sheetClose').addEventListener('click', closeSheet);
+  sheet.addEventListener('click', (e) => { if (e.target === sheet) closeSheet(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+
+  // Поделиться контактом
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    // Делимся визиткой; если открыта по партнёрской ссылке — код партнёра сохраняется
+    const site = 'https://halilovtamerlan12-svg.github.io/vizitka/' + (ref ? '?ref=' + ref : '');
+    const data = {
+      title: 'Автошкола Машинка',
+      text: 'Автошкола «Машинка». ВКонтакте: vk.ru/mashinkatmn, Max и телефон: +7 992 300-88-77',
+      url: site
+    };
+    if (navigator.share) {
+      try { await navigator.share(data); } catch {}
+    } else {
+      copyText(data.text + ' — ' + data.url);
+      showToast('Контакт скопирован');
+    }
   });
 
   // Дополнительное вождение: показать выбор АКПП / МКПП
