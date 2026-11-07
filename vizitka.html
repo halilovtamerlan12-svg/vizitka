@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Автошкола «Машинка»">
 <meta property="og:title" content="Автошкола «Машинка» — обучение вождению">
-<meta property="og:description" content="Бесплатное пробное вождение и ознакомительное занятие по теории. Запись в один клик во ВКонтакте или Max.">
+<meta property="og:description" content="Права категории B от 19 900 ₽, первый взнос 5000 ₽. Бесплатное пробное вождение. Запись в один клик во ВКонтакте или Max.">
 <meta property="og:url" content="https://halilovtamerlan12-svg.github.io/vizitka/">
 <meta property="og:image" content="https://halilovtamerlan12-svg.github.io/vizitka/promo/og.png">
 <meta property="og:image:width" content="1200">
@@ -32,7 +32,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html, body { height: 100%; }
+  html { height: 100%; }
 
   body {
     background: var(--bg);
@@ -405,6 +405,31 @@
   }
   .gear:hover small, .gear:focus-visible small { color: #eaeaea; }
 
+  /* Баннер для тех, кто пришёл по ссылке друга */
+  .ref-banner {
+    margin-top: 14px; padding: 12px 14px; border-radius: 14px; text-align: left;
+    background: rgba(46, 204, 113, .12); border: 1px solid rgba(46, 204, 113, .45);
+    color: #eafff2; font-size: 14px; line-height: 1.45;
+  }
+  .ref-banner b { color: #7dffb0; white-space: nowrap; }
+  .ref-banner small { display: block; margin-top: 4px; color: rgba(234, 255, 242, .7); font-size: 12px; }
+  .service.partner { border-color: rgba(46, 204, 113, .45); background: rgba(46, 204, 113, .08); }
+
+  /* Окно «Методика» */
+  .method .sheet-card { max-height: 88vh; overflow-y: auto; text-align: left; align-self: center; }
+  .m-lead { text-align: center; color: #cfcfcf; font-size: 14px; line-height: 1.45; margin: -4px 0 16px; }
+  .m-block { margin-bottom: 14px; padding: 14px; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid var(--border); }
+  .m-h { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+  .m-block p { color: #d6d6d6; font-size: 14px; line-height: 1.5; margin: 0 0 6px; }
+  .m-block ul, .m-block ol { margin: 0; padding-left: 0; list-style: none; }
+  .m-block li { position: relative; padding-left: 22px; color: #d6d6d6; font-size: 14px; line-height: 1.5; margin-bottom: 7px; }
+  .m-block ul li::before { content: "✓"; position: absolute; left: 2px; color: #2ecc71; font-weight: 800; }
+  .m-block ol { counter-reset: m; }
+  .m-block ol li { padding-left: 30px; counter-increment: m; }
+  .m-block ol li::before { content: counter(m); position: absolute; left: 0; top: 1px; width: 21px; height: 21px; border-radius: 50%;
+    background: #e10600; color: #fff; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .m-block b { color: #fff; }
+
   /* Кнопка «Написать нам» */
   .cta {
     position: relative;
@@ -605,7 +630,9 @@
 
     <h1 class="logo"><img src="promo/logo.webp" alt="Автошкола «Машинка»" width="977" height="1024"></h1>
 
-    <div class="role"><span class="dot"></span>Обучение вождению</div>
+    <div class="role"><span class="dot"></span>Права категории B · от 19 900 ₽</div>
+    <div class="sheet-note" style="margin-top:8px">Первый взнос 5000 ₽, остальное частями без % · Избышева, 5 и Герцена, 88</div>
+    <div class="ref-banner" id="refBanner" hidden>🎁 Вас пригласил друг! Ваш промокод <b id="refCode"></b> — скидка 1000 ₽ на обучение.<small>Промокод уже добавлен в сообщение: просто нажмите кнопку записи ниже. Если звоните — назовите его. Скидка не действует на тариф «Старт».</small></div>
 
     <div class="divider"></div>
 
@@ -691,11 +718,19 @@
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
       </a>
 
-      <a class="service" data-msg="Здравствуйте! Расскажите, пожалуйста, о вашей методике преподавания." href="#">
+      <a class="service" id="methodBtn" href="#">
         <span class="ico" aria-hidden="true">💡</span>
         <span class="label">Узнать о методике преподавания</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
       </a>
+
+      <!-- ПИЛОТ: кнопка скрыта, пока тестируем на знакомых
+      <a class="service partner" href="partner.html">
+        <span class="ico" aria-hidden="true">🤝</span>
+        <span class="label">Приведи друга — получи 2000&nbsp;₽<br><small style="opacity:.75;font-weight:400">Личная ссылка и QR-код за минуту</small></span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+      </a>
+      -->
     </nav>
 
     <a class="cta" id="cta" data-msg="Здравствуйте!" href="#">
@@ -710,6 +745,46 @@
   </main>
 
   <!-- Выбор, куда написать: ВКонтакте / Max / звонок -->
+  <div class="sheet method" id="method" hidden>
+    <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="methodTitle">
+      <div class="sheet-title" id="methodTitle">💡 Как мы учим</div>
+      <div class="m-lead">Не зубрёжка и не «покататься с инструктором». Мы учим понимать дорогу и тренируем навык — шаг за шагом.</div>
+
+      <div class="m-block">
+        <div class="m-h">📘 Теория: понимать, а не заучивать</div>
+        <ul>
+          <li>Не читаем и не зубрим билеты — разбираем, <b>зачем появилось каждое правило</b> и от какой опасности оно защищает.</li>
+          <li>Учим мыслить как профессионал и как организатор движения: видеть логику ПДД, а не вспоминать номер пункта.</li>
+          <li>Поэтому на экзамене и на дороге правильное решение приходит само — вы понимаете, а не угадываете.</li>
+        </ul>
+      </div>
+
+      <div class="m-block">
+        <div class="m-h">🚗 Вождение: 4 этапа</div>
+        <ol>
+          <li><b>Органы управления.</b> Одна задача за раз: руль и обстановку берёт на себя инструктор, вы отрабатываете педали. За первое занятие — 50–80 троганий с места.</li>
+          <li><b>Трогание, передачи, руль.</b> Упражнения от простого к сложному. Усложняем, когда получается 8–9 раз из 10, — без топтания на месте и без перегруза.</li>
+          <li><b>Скорость без страха.</b> Учимся ехать со скоростью потока и вовремя начинать тормозить — главный навык безопасного водителя.</li>
+          <li><b>Руль без напряжения.</b> Спокойные руки, свободная посадка, упор на работу ногами — и машина слушается.</li>
+        </ol>
+      </div>
+
+      <div class="m-block">
+        <div class="m-h">👨‍🏫 Инструкторы</div>
+        <ul>
+          <li><b>Чётко знают, что делать</b> на каждом занятии — у каждого этапа свои упражнения.</li>
+          <li>Если не получается, понимают <b>почему</b> и знают, на что указать: возвращаемся к упражнению именно на эту ошибку.</li>
+          <li>Учитывают <b>психофизиологические особенности</b> каждого курсанта — темп, характер, волнение.</li>
+          <li>Создают спокойную обстановку без крика, в которой навык усваивается лучше всего.</li>
+        </ul>
+      </div>
+
+      <a class="ch max m-go" data-msg="Здравствуйте! Хочу записаться на бесплатное пробное вождение." href="#">Попробовать бесплатно</a>
+      <a class="ch m-go" data-msg="Здравствуйте! Расскажите, пожалуйста, подробнее о вашей методике преподавания." href="#">Задать вопрос о методике</a>
+      <button class="sheet-close" id="methodClose" type="button">Закрыть</button>
+    </div>
+  </div>
+
   <div class="sheet" id="sheet" hidden>
     <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
       <div class="sheet-title" id="sheetTitle">Куда написать?</div>
@@ -773,7 +848,7 @@
   // Партнёрский код из ссылки вида ?ref=IVAN — добавляется в сообщение, чтобы было видно, кто привёл клиента.
   // Запоминается на 30 дней, если человек вернётся на визитку позже без кода в ссылке.
   const REF_KEY = 'mashinka_ref';
-  const cleanRef = (v) => (v || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 32).toUpperCase();
+  const cleanRef = (v) => (v || '').replace(/[^A-Za-zА-Яа-яЁё0-9_-]/g, '').slice(0, 32).toUpperCase();
   let ref = cleanRef(new URLSearchParams(location.search).get('ref'));
   try {
     if (ref) {
@@ -783,6 +858,11 @@
       if (saved && Date.now() - saved.t < 30 * 24 * 3600 * 1000) ref = cleanRef(saved.ref);
     }
   } catch {}
+
+  if (ref) {
+    document.getElementById('refCode').textContent = ref;
+    document.getElementById('refBanner').hidden = false;
+  }
 
   const PHONE = '+79923008877';
 
@@ -814,12 +894,12 @@
   let currentMsg = '';
 
   function openSheet(msg) {
-    currentMsg = (msg || 'Здравствуйте!') + (ref ? '\n\nКод партнёра: ' + ref : '');
+    currentMsg = (msg || 'Здравствуйте!') + (ref ? '\n\nПромокод друга: ' + ref : '');
     document.getElementById('sheetMsg').textContent = currentMsg;
     sheetMain.hidden = false;
     sheetMaxSteps.hidden = true;
     sheetRef.hidden = !ref;
-    if (ref) sheetRef.textContent = 'Если будете звонить, назовите код партнёра: ' + ref;
+    if (ref) sheetRef.textContent = 'Если будете звонить, назовите промокод: ' + ref + ' — скидка 1000 ₽';
     sheet.hidden = false;
   }
   function closeSheet() { sheet.hidden = true; }
@@ -846,13 +926,19 @@
     copyText(currentMsg).then(() => showToast('Сообщение скопировано'));
   });
   document.getElementById('sheetClose').addEventListener('click', closeSheet);
+  const method = document.getElementById('method');
+  document.getElementById('methodBtn').addEventListener('click', (e) => { e.preventDefault(); method.hidden = false; method.querySelector('.sheet-card').scrollTop = 0; });
+  document.getElementById('methodClose').addEventListener('click', () => { method.hidden = true; });
+  method.addEventListener('click', (e) => { if (e.target === method) method.hidden = true; });
+  method.querySelectorAll('.m-go').forEach((el) => el.addEventListener('click', () => { method.hidden = true; }));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') method.hidden = true; });
   sheet.addEventListener('click', (e) => { if (e.target === sheet) closeSheet(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
 
   // Поделиться контактом
   document.getElementById('shareBtn').addEventListener('click', async () => {
     // Делимся визиткой; если открыта по партнёрской ссылке — код партнёра сохраняется
-    const site = 'https://halilovtamerlan12-svg.github.io/vizitka/' + (ref ? '?ref=' + ref : '');
+    const site = 'https://halilovtamerlan12-svg.github.io/vizitka/' + (ref ? '?ref=' + encodeURIComponent(ref) : '');
     const data = {
       title: 'Автошкола Машинка',
       text: 'Автошкола «Машинка». ВКонтакте: vk.ru/mashinkatmn, Max: +7 992 300-88-77, телефон: +7 904 495-63-48',

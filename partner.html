@@ -173,7 +173,9 @@
       <div class="step">Введите имя — получите личную ссылку и QR-код.</div>
       <div class="step">Отправляйте ссылку знакомым в личные сообщения — во ВКонтакте или Max.</div>
       <div class="step">Клиент пишет в автошколу через визитку — ваш код автоматически добавляется в сообщение.</div>
-      <div class="step">Когда клиент оплатит обучение, вы получаете вознаграждение. Условия уточняйте у автошколы.</div>
+      <div class="step">Друг называет ваш промокод и получает скидку 1000 ₽ (кроме тарифа «Старт»).</div>
+      <div class="step"><span>Когда он заключит договор и оплатит от 10 000 ₽, через 14 дней вы получаете <b>2000 ₽</b>. Сколько друзей — столько выплат.</span></div>
+      <div class="step">Выплата — самозанятым, по чеку из приложения «Мой налог» (оформление бесплатно, 5 минут, налог 4 %).</div>
     </div>
 
     <div class="rules">
@@ -237,10 +239,10 @@
 
   const TRANSLIT = { а:'a', б:'b', в:'v', г:'g', д:'d', е:'e', ё:'e', ж:'zh', з:'z', и:'i', й:'y', к:'k', л:'l', м:'m', н:'n', о:'o', п:'p', р:'r', с:'s', т:'t', у:'u', ф:'f', х:'h', ц:'ts', ч:'ch', ш:'sh', щ:'sch', ъ:'', ы:'y', ь:'', э:'e', ю:'yu', я:'ya' };
   function toCode(name) {
-    return name.toLowerCase()
-      .split('').map((c) => (c in TRANSLIT ? TRANSLIT[c] : c)).join('')
-      .replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')
-      .slice(0, 32).toUpperCase();
+    // Код как в боте автошколы: ДРУГ-ИМЯ + первая буква фамилии (ДРУГ-ИВАНП)
+    const w = name.trim().toUpperCase().replace(/[^A-ZА-ЯЁ0-9\s-]/g, '').split(/\s+/).filter(Boolean);
+    if (!w.length) return '';
+    return ('ДРУГ-' + w[0] + (w[1] ? w[1][0] : '')).slice(0, 24);
   }
 
   function showToast(text) {
@@ -263,11 +265,11 @@
       $('codeHint').textContent = 'Ваш код партнёра появится здесь';
       return;
     }
-    link = SITE + '?ref=' + code;
+    link = SITE + '?ref=' + encodeURIComponent(code);
     $('codeHint').innerHTML = 'Ваш код партнёра: <b>' + code + '</b>';
-    $('link').textContent = link;
+    $('link').textContent = SITE + '?ref=' + code;
     $('openLink').href = link;
-    registerText = 'Здравствуйте! Хочу стать партнёром автошколы.\nИмя: ' + nameInput.value.trim() + '\nКод партнёра: ' + code;
+    registerText = 'Здравствуйте! Хочу участвовать в программе «Приведи друга».\nИмя: ' + nameInput.value.trim() + '\nПромокод: ' + code;
     qrView.makeCode(link);
     qrHi.makeCode(link);
     $('result').classList.add('show');
